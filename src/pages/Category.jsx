@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner'
 import ListingItem from '../components/ListingItem'
 import { async } from '@firebase/util'
 
-const Offers = () => {
+const Category = () => {
 
 const [listings, setListings] = useState(null)
 const [loading, setLoading] = useState(true)
@@ -25,7 +25,7 @@ try {
 
 const q = query(
 	listingsRef,
-	 where('offer', '==', true),
+	 where('type', '==', params.categoryName),
 	  orderBy('timestamp', 'desc'),
 	  limit(10)
 	  )
@@ -47,13 +47,15 @@ setLoading(false)
 }
 	}
 	fetchListings()
-}, [])
+}, [params.categoryName])
 
   return (
 	 <div className='category'>
 		<header>
 			<p className="pageHeader">
-				Offers
+				{params.categoryName === 'rent' 
+				? 'Places for rent' 
+				: 'Places for sale'}
 			</p>
 		</header>
 { loading ? (
@@ -70,11 +72,11 @@ setLoading(false)
 	</ul>
  </main>
  </> 
- ): (<p>There are no current offers</p>
+ ): (<p>No listings for {params.categoryName}</p>
  )}
 
 	 </div>
   )
 }
 
-export default Offers
+export default Category
