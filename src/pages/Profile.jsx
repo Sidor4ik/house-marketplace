@@ -6,6 +6,8 @@ import {db} from '../firebase.config'
 import { useNavigate, Link } from 'react-router-dom'
 import { async } from '@firebase/util'
 import {toast} from 'react-toastify'
+import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import homeIcon from '../assets/svg/homeIcon.svg'
 
 const Profile = () => {
 	
@@ -50,7 +52,7 @@ const onChange = (e) => {
 	}))
 }
 
-  return  <div className='profile'>
+  return  (<div className='profile'>
 	<header className="profileHeader">
 		<p className='pageHeader'>My Profile</p>
 		<button type='button' className="logOut" onClick={onLogout}>
@@ -87,9 +89,15 @@ const onChange = (e) => {
 			onChange={onChange}/>
 		</form>
 	</div>
+
+	<Link to='/create-listing' className='createListing'>
+		<img src={homeIcon} alt="home" />
+		<p>Sell or rent your home</p>
+		<img src={arrowRight} alt="arrow right" />
+	</Link>
 </main>
   </div>
-
+  )
 }
 
 export default Profile
