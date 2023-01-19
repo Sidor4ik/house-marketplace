@@ -10,6 +10,7 @@ import { async } from '@firebase/util'
 
 const Category = () => {
 
+
 const [listings, setListings] = useState(null)
 const [loading, setLoading] = useState(true)
 
