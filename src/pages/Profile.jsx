@@ -94,6 +94,10 @@ const onDelete = async (listingId) => {
 	}
  }
 
+
+const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`)
+
+
   return  (<div className='profile'>
 	<header className="profileHeader">
 		<p className='pageHeader'>My Profile</p>
@@ -148,6 +152,7 @@ const onDelete = async (listingId) => {
                   listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>
