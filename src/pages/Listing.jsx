@@ -124,6 +124,7 @@ if (loading) {
         <p className='listingLocationTitle'>Location</p>
 
 		  <div className='leafletContainer'>
+          {/* Move to separate component */}
           <MapContainer
             style={{ height: '100%', width: '100%' }}
             center={[listing.latitude, listing.longitude]}
