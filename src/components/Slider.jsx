@@ -23,6 +23,7 @@ const Slider = () => {
 	const navigate = useNavigate()
  
 	useEffect(() => {
+		// move to the separate layer
 	  const fetchListings = async () => {
 		 const listingsRef = collection(db, 'listings')
 		 const q = query(listingsRef, orderBy('timestamp', 'desc'), limit(5))
@@ -52,22 +53,17 @@ const Slider = () => {
 	  return <></>
 	}
 
-
-	if (listings.length === 0) {
-		return <></>
-	 }
-
 	return (
 		listings && (
 		  <>
 			 <p className='exploreHeading'>Recommended</p>
   
 			 <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        slidesPerView={1}
-        pagination={{ clickable: true }}
-        navigation
-      >
+				modules={[Navigation, Pagination, Scrollbar, A11y]}
+				slidesPerView={1}
+				pagination={{ clickable: true }}
+				navigation
+			>
         {listings.map(({ data, id }) => {
           return (
             <SwiperSlide
@@ -84,6 +80,7 @@ const Slider = () => {
               >
                 <p className="swiperSlideText">{data.name}</p>
                 <p className="swiperSlidePrice">
+				  {/* Move to Price Component*/}
                   ${data.discountedPrice ?? data.regularPrice}{' '}
                   {data.type === 'rent' && '/month'}
                 </p>

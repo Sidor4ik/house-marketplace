@@ -14,6 +14,7 @@ const Contact = () => {
 	const params = useParams()
  
 	useEffect(() => {
+		// move DB layer
 	  const getLandlord = async () => {
 		 const docRef = doc(db, 'users', params.landlordId)
 		 const docSnap = await getDoc(docRef)
@@ -28,6 +29,7 @@ const Contact = () => {
 	  getLandlord()
 	}, [params.landlordId])
  
+	// add sanitizing for text string (encodeURILcomponent, new Url, google for url sanitizing) 
 	const onChange = (e) => setMessage(e.target.value)
  
 	return (

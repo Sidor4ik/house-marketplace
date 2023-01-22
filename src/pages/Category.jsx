@@ -21,6 +21,7 @@ useEffect(()=>{
 	const fetchListings = async() =>{
 
 try {
+	// move to DB layer (getListings)
 	// Get reference
 	const listingsRef = collection(db, 'listings')
 // Create a query
@@ -37,13 +38,13 @@ const querySnap = await getDocs(q)
 const lastVisible = querySnap.docs[querySnap.docs.length - 1]
         setLastFetchedListing(lastVisible)
 
-const listings = []
-querySnap.forEach((doc)=>{
-return listings.push({
-	id: doc.id,
-	data: doc.data()
-})
-})
+const listings = querySnap.map((doc)=>{
+	return ({
+		id: doc.id,
+		data: doc.data()
+	})
+});
+
 
 setListings(listings)
 setLoading(false)
@@ -59,6 +60,7 @@ setLoading(false)
 // Pagination / Load More
 const onFetchMoreListings = async () => {
 	try {
+		// move to reusable function + db layer
 	  // Get reference
 	  const listingsRef = collection(db, 'listings')
 
@@ -94,19 +96,23 @@ const onFetchMoreListings = async () => {
  }
 
 
+	const textList = {
+		rent: 'Places for rent',
+		sale: 'Places for sale',
+		build: 'Places for build'
+	}
 
+	const content = null;
 
 
   return (
+	// Create Layout component
 	<div className='category'>
 	<header>
 	  <p className='pageHeader'>
-		 {params.categoryName === 'rent'
-			? 'Places for rent'
-			: 'Places for sale'}
+		 {textList[params.categoryName]}
 	  </p>
 	</header>
-
 	{loading ? (
 	  <Spinner />
 	) : listings && listings.length > 0 ? (

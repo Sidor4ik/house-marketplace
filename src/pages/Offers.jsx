@@ -7,7 +7,7 @@ import {toast} from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListingItem from '../components/ListingItem'
 import { async } from '@firebase/util'
-
+// think about component with 'Load more'
 const Offers = () => {
 
 const [listings, setListings] = useState(null)

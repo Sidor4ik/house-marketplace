@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
 import {toast} from 'react-toastify'
 
+
+// create more general component to allow editing
 const CreateListing = () => {
 	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
 	const [loading, setLoading] = useState(false)
@@ -35,6 +37,7 @@ const CreateListing = () => {
    const isMounted = useRef(true)
 
 useEffect(()=>{
+  // is mounted
 	if (isMounted){
 onAuthStateChanged(auth, (user) =>{
 	if (user) {
@@ -135,7 +138,7 @@ navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 
 const onMutate = (e) =>{
 	let boolean = null
-
+  // think to simplify
 	if(e.target.value === 'true'){
 		boolean = true
 	}
@@ -304,6 +307,13 @@ if (loading) {
 {!geolocationEnabled && (
             <div className='formLatLng flex'>
               <div>
+                {/* <Input
+                  type='number'
+                  id='latitude'
+                  value={latitude}
+                  onChange={onMutate}
+                  required
+                  label='Latitude' /> */}
                 <label className='formLabel'>Latitude</label>
                 <input
                   className='formInputSmall'
@@ -315,7 +325,7 @@ if (loading) {
                 />
               </div>
               <div>
-                <label className='formLabel'>Longitude</label>
+                <label for="longitude" className='formLabel'>Longitude</label>
                 <input
                   className='formInputSmall'
                   type='number'
@@ -330,18 +340,20 @@ if (loading) {
 
 <label className='formLabel'>Offer</label>
           <div className='formButtons'>
+            {/* <Button
+              active={offer}
+              value={true}
+              onClick={onMutate}>Yes</Button> */}
             <button
               className={offer ? 'formButtonActive' : 'formButton'}
               type='button'
               id='offer'
-              value={true}
-              onClick={onMutate}
             >
               Yes
             </button>
             <button
               className={
-                !offer && offer !== null ? 'formButtonActive' : 'formButton'
+                offer === false ? 'formButtonActive' : 'formButton'
               }
               type='button'
               id='offer'

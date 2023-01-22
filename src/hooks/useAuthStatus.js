@@ -8,6 +8,7 @@ const [checkingStatus, setCheckingStatus] = useState(true)
 const isMounted = useRef(true)
 
 useEffect(() => {
+	// check the condition (without isMounted)
 	if (isMounted) {
 		const auth = getAuth()
 		onAuthStateChanged(auth, (user) => {
